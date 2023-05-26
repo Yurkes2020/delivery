@@ -1,17 +1,18 @@
 import { Link } from 'react-router-dom';
+import { List } from './Header.styled';
 
 export const Header = () => {
   return (
     <header>
       <nav>
-        <ul>
+        <List>
           <li>
-            <Link>Shop</Link>
+            <Link to="/">Shop</Link>
           </li>
           <li>
-            <Link>Shopping cart</Link>
+            <Link to="/cart">Shopping cart</Link>
           </li>
-        </ul>
+        </List>
       </nav>
     </header>
   );
