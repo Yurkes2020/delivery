@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { List } from './Header.styled';
+import { List, Head } from './Header.styled';
 
 export const Header = () => {
   return (
-    <header>
+    <Head>
       <nav>
         <List>
           <li>
@@ -14,6 +14,6 @@ export const Header = () => {
           </li>
         </List>
       </nav>
-    </header>
+    </Head>
   );
 };

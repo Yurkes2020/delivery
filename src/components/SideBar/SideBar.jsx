@@ -1,15 +1,29 @@
-import { Aside } from './SideBar.styled';
+import { Aside, Item, Button } from './SideBar.styled';
+import { useState } from 'react';
 
-export const SideBar = () => {
+export const SideBar = ({ data, shopId }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <Aside>
       <p>Shops</p>
       <ul>
-        <li>Mc Donalds</li>
-        <li>CFK</li>
-        <li>Japan Food</li>
-        <li>Chines food</li>
-        <li>Ukrainian food</li>
+        {data.map(({ _id, company }, index) => (
+          <Item key={_id}>
+            <Button
+              style={{
+                backgroundColor: activeIndex === index ? 'yellow' : 'blue',
+              }}
+              onClick={() => {
+                shopId(_id);
+                setActiveIndex(index);
+              }}
+              type="button"
+            >
+              {company}
+            </Button>
+          </Item>
+        ))}
       </ul>
     </Aside>
   );
