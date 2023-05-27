@@ -63,6 +63,7 @@ export const FormOrder = () => {
               <p>{name}</p>
               <p>Price:{price}</p>
               <Input
+                min={0}
                 name={id}
                 onWheel={handleWheel}
                 onChange={handleChange}

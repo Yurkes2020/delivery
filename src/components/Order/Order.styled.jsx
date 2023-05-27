@@ -27,3 +27,9 @@ export const Add = styled.button`
   display: block;
   border-radius: 10px;
 `;
+
+export const Remove = styled.button`
+  cursor: pointer;
+  display: block;
+  border-radius: 10px;
+`;

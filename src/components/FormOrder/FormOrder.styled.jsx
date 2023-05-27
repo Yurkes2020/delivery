@@ -4,21 +4,22 @@ export const Wrapper = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  height: 80vh;
+  height: 90vh;
   padding: 20px;
   background-color: #ebc7c7;
 `;
 
 export const Form = styled.form`
+  position: relative;
   display: grid;
-  height: 90%;
+  height: 500px;
   background-color: #d8aaaa;
   border-radius: 20px;
 `;
 
 export const List = styled.ul`
   overflow: auto;
-  height: 90%;
+  height: 500px;
   padding: 20px;
   background-color: #1e1c1c;
   border-radius: 20px;
@@ -36,8 +37,8 @@ export const Item = styled.li`
 
 export const Submit = styled.button`
   position: absolute;
-  right: 50px;
-  bottom: 20px;
+  right: -900px;
+  bottom: -70px;
   width: 150px;
   height: 50px;
   border: none;
@@ -46,5 +47,12 @@ export const Submit = styled.button`
 `;
 
 export const Input = styled.input`
-  overflow: hidden;
+  height: 30px;
+  text-align: center;
+  outline: none;
+  border-radius: 10px;
+  &::-webkit-inner-spin-button {
+    padding: 10px;
+    cursor: pointer;
+  }
 `;

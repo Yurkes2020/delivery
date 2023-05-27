@@ -1,7 +1,6 @@
-import { Wrap, List, Item, Add, Remove } from './Order.styled';
 import { useState } from 'react';
 
-export const Order = ({ data }) => {
+export const OrderItem = () => {
   const [change, setChange] = useState(false);
 
   const handleClick = (id) => {
@@ -33,27 +32,21 @@ export const Order = ({ data }) => {
   const handleChange = () => {
     setChange(false);
   };
-
   return (
-    <Wrap>
-      <List>
-        {data &&
-          data.food.map(({ _id, picture, name }) => (
-            <Item key={_id}>
-              <img src={picture} alt="burger"></img>
-              {name}
-              {change ? (
-                <Remove onClick={handleChange} type="button">
-                  Remove from cart
-                </Remove>
-              ) : (
-                <Add onClick={() => handleClick(_id)} type="button">
-                  Add to cart
-                </Add>
-              )}
-            </Item>
-          ))}
-      </List>
-    </Wrap>
+    <>
+      <Item key={_id}>
+        <img src={picture} alt="burger"></img>
+        {name}
+        {change ? (
+          <Remove onClick={handleChange} type="button">
+            Remove from cart
+          </Remove>
+        ) : (
+          <Add onClick={() => handleClick(_id)} type="button">
+            Add to cart
+          </Add>
+        )}
+      </Item>
+    </>
   );
 };
