@@ -21,7 +21,7 @@ const Shop = () => {
   return (
     <Main>
       <SideBar data={shops} shopId={setId}></SideBar>
-      <Order data={foodId?.food}></Order>
+      <Order data={foodId}></Order>
     </Main>
   );
 };

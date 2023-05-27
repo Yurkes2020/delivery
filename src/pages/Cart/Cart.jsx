@@ -1,5 +1,11 @@
+import { FormOrder } from 'components/FormOrder/FormOrder';
+
 const ShoppingCart = () => {
-  return <div>dfgdsfgsdfg</div>;
+  return (
+    <main>
+      <FormOrder></FormOrder>
+    </main>
+  );
 };
 
 export default ShoppingCart;
