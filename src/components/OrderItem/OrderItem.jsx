@@ -1,52 +1,37 @@
 import { useState } from 'react';
+import { Item, Add, Remove } from './OrderItem.styled';
 
-export const OrderItem = () => {
+export const OrderItem = ({ data, setAdd, setRemove }) => {
   const [change, setChange] = useState(false);
 
-  const handleClick = (id) => {
-    setChange(true);
-    let storedData = localStorage.getItem('order');
-
-    const { name, price, picture } = data.food.find((i) => i._id === id);
-
-    let order = {};
-
-    if (storedData) {
-      try {
-        order = JSON.parse(storedData);
-        const newArrayValue = { name, price, id, picture, count: 1 };
-        order.orders.push(newArrayValue);
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      order = {
-        company: data.company,
-        address: data.address,
-        orders: [{ name, price, id, picture, count: 1 }],
-      };
-    }
-    localStorage.setItem('order', JSON.stringify(order));
-  };
-
-  const handleChange = () => {
-    setChange(false);
-  };
   return (
     <>
-      <Item key={_id}>
-        <img src={picture} alt="burger"></img>
-        {name}
-        {change ? (
-          <Remove onClick={handleChange} type="button">
-            Remove from cart
-          </Remove>
-        ) : (
-          <Add onClick={() => handleClick(_id)} type="button">
-            Add to cart
-          </Add>
-        )}
-      </Item>
+      {data && (
+        <Item>
+          <img src={data.picture} alt="burger"></img>
+          {change ? (
+            <Remove
+              onClick={() => {
+                setChange((prev) => !prev);
+                setRemove(data._id);
+              }}
+              type="button"
+            >
+              Remove from cart
+            </Remove>
+          ) : (
+            <Add
+              onClick={() => {
+                setChange((prev) => !prev);
+                setAdd(data._id);
+              }}
+              type="button"
+            >
+              Add to cart
+            </Add>
+          )}
+        </Item>
+      )}
     </>
   );
 };

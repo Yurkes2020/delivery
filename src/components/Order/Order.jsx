@@ -1,57 +1,57 @@
-import { Wrap, List, Item, Add, Remove } from './Order.styled';
-import { useState } from 'react';
+import { Wrap, List } from './Order.styled';
+import { OrderItem } from 'components/OrderItem/OrderItem';
+import { useState, useEffect } from 'react';
 
 export const Order = ({ data }) => {
-  const [change, setChange] = useState(false);
+  const [add, setAdd] = useState(null);
+  const [remove, setRemove] = useState(null);
 
-  const handleClick = (id) => {
-    setChange(true);
+  useEffect(() => {
+    if (!data) return;
+
     let storedData = localStorage.getItem('order');
+    console.log(storedData);
 
-    const { name, price, picture } = data.food.find((i) => i._id === id);
+    const { name, price, picture } = data.food.find(
+      (i) => i._id === add || remove
+    );
 
     let order = {};
 
     if (storedData) {
-      try {
-        order = JSON.parse(storedData);
-        const newArrayValue = { name, price, id, picture, count: 1 };
+      order = JSON.parse(storedData);
+      if (remove) {
+        const indx = order.orders.findIndex((i) => i.id === remove);
+
+        order.orders.splice(indx, 1);
+      } else {
+        const newArrayValue = { name, price, id: add, picture, count: 1 };
         order.orders.push(newArrayValue);
-      } catch (error) {
-        console.error(error);
       }
     } else {
       order = {
         company: data.company,
         address: data.address,
-        orders: [{ name, price, id, picture, count: 1 }],
+        orders: [{ name, price, id: add, picture, count: 1 }],
       };
     }
-    localStorage.setItem('order', JSON.stringify(order));
-  };
 
-  const handleChange = () => {
-    setChange(false);
-  };
+    localStorage.setItem('order', JSON.stringify(order));
+
+    localStorage.clear();
+  }, [add, remove]);
 
   return (
     <Wrap>
       <List>
         {data &&
-          data.food.map(({ _id, picture, name }) => (
-            <Item key={_id}>
-              <img src={picture} alt="burger"></img>
-              {name}
-              {change ? (
-                <Remove onClick={handleChange} type="button">
-                  Remove from cart
-                </Remove>
-              ) : (
-                <Add onClick={() => handleClick(_id)} type="button">
-                  Add to cart
-                </Add>
-              )}
-            </Item>
+          data.food.map((item) => (
+            <OrderItem
+              setRemove={setRemove}
+              data={item}
+              setAdd={setAdd}
+              key={item._id}
+            ></OrderItem>
           ))}
       </List>
     </Wrap>
