@@ -44,3 +44,7 @@ export const Submit = styled.button`
   border-radius: 15px;
   background-color: #4b3baf;
 `;
+
+export const Input = styled.input`
+  overflow: hidden;
+`;

@@ -14,7 +14,7 @@ export const Order = ({ data }) => {
         const newArrayValue = { name, price, id, picture, count: 1 };
         order.orders.push(newArrayValue);
       } catch (error) {
-        console.error('Ошибка при парсинге данных:', error);
+        console.error(error);
       }
     } else {
       order = {

@@ -1,4 +1,4 @@
-import { Form, Wrapper, List, Item, Submit } from './FormOrder.styled';
+import { Form, Wrapper, List, Item, Submit, Input } from './FormOrder.styled';
 import { useState, useEffect } from 'react';
 
 export const FormOrder = () => {
@@ -21,14 +21,17 @@ export const FormOrder = () => {
 
     setData((prevData) => {
       const updatedObjects = prevData.orders.map((obj) => {
-        if (obj.id === idOrder) {
-          return { ...obj, count };
-        }
-        return obj;
+        return obj.id === idOrder ? { ...obj, count } : obj;
       });
-
       return { ...prevData, orders: updatedObjects };
     });
+  };
+
+  const handleWheel = (e) => {
+    const delta = Math.max(-1, Math.min(1, e.deltaY));
+    if (delta !== 0) {
+      e.target.blur();
+    }
   };
 
   return (
@@ -59,8 +62,9 @@ export const FormOrder = () => {
             <div>
               <p>{name}</p>
               <p>Price:{price}</p>
-              <input
+              <Input
                 name={id}
+                onWheel={handleWheel}
                 onChange={handleChange}
                 defaultValue={1}
                 type="number"
