@@ -12,69 +12,63 @@ export const Order = ({ data, setStorage }) => {
     if (!data) return;
 
     const newOrder = data?.food?.find((i) => i._id === add || remove);
-    let order = {};
 
-    if (myData) {
-      const as = JSON.parse(myData);
-      order = as;
-      if (remove) {
-        const indx = order.orders.findIndex((i) => i.id === remove);
-
-        order.orders.splice(indx, 1);
-      } else {
-        const newArrayValue = {
-          name: newOrder.name,
-          price: newOrder.price,
-          id: newOrder.id,
-          picture: newOrder.name,
-          count: 1,
-        };
-        order.orders.push(newArrayValue);
-      }
-    } else {
-      order = {
-        company: data.company,
-        address: data.address,
-        orders: [
-          {
-            name: newOrder.name,
-            price: newOrder.price,
-            id: newOrder.id,
-            picture: newOrder.name,
-            count: 1,
-          },
-        ],
-      };
+    if (!myData) {
+      addLS(newOrder);
     }
-
-    const newData = JSON.stringify(order);
-
-    setMyData(newData);
-    setStorage(true);
+    if (myData && add) {
+      updateLS(newOrder);
+    }
+    if (myData && remove) {
+      removeLS(newOrder);
+    }
   }, [add, remove]);
 
-  // const addLS = (obj) => {
-  //   const order = {
-  //     company: data.company,
-  //     address: data.address,
-  //     orders: [
-  //       {
-  //         name: obj.name,
-  //         price: obj.price,
-  //         id: obj.id,
-  //         picture: obj.name,
-  //         count: 1,
-  //       },
-  //     ],
-  //   };
-  //   const newData = JSON.stringify(order);
-  //   setMyData(newData);
-  // };
+  const addLS = (obj) => {
+    const order = {
+      company: data.company,
+      address: data.address,
+      orders: [
+        {
+          name: obj.name,
+          price: obj.price,
+          id: obj.id,
+          picture: obj.picture,
+          count: 1,
+        },
+      ],
+    };
+
+    const newData = JSON.stringify(order);
+    setMyData(newData);
+  };
+
+  const updateLS = (obj) => {
+    const newData = JSON.parse(myData);
+
+    const newArrayValue = {
+      name: obj.name,
+      price: obj.price,
+      id: obj.id,
+      picture: obj.picture,
+      count: 1,
+    };
+    newData.orders.push(newArrayValue);
+    const update = JSON.stringify(newData);
+    setMyData(update);
+  };
 
   const removeLS = (obj) => {
-    const indx = obj.orders.findIndex((i) => i.id === remove);
+    const newData = JSON.parse(myData);
+    const indx = newData.orders.findIndex((i) => i.id === remove);
+    if (newData.orders.length === 1) {
+      setMyData('');
+    } else {
+      newData.orders.splice(indx, 1);
 
-    obj.orders.splice(indx, 1);
+      const update = JSON.stringify(newData);
+      setMyData(update);
+    }
   };
 
   return (
