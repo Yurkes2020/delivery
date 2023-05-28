@@ -28,7 +28,7 @@ export const FormOrder = () => {
 
   const send = (res) => {
     return axios
-      .post('http://localhost:3030/cart', res)
+      .post('https://delivery-beck.onrender.com/cart', res)
       .then()
       .catch((error) => {
         console.error('Ошибка:', error);
