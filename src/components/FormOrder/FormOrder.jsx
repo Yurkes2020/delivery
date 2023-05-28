@@ -56,15 +56,15 @@ export const FormOrder = () => {
         <Submit type="submit">Submit</Submit>
       </Form>
       <List>
-        {data?.orders?.map(({ price, name, id, picture }) => (
-          <Item key={id}>
+        {data?.orders?.map(({ price, name, _id, picture }) => (
+          <Item key={_id}>
             <img src={picture} alt={name} />
             <div>
               <p>{name}</p>
               <p>Price:{price}</p>
               <Input
                 min={0}
-                name={id}
+                name={_id}
                 onWheel={handleWheel}
                 onChange={handleChange}
                 defaultValue={1}

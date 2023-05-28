@@ -1,73 +1,77 @@
 import { Wrap, List } from './Order.styled';
 import { OrderItem } from 'components/OrderItem/OrderItem';
 import { useState, useEffect } from 'react';
-import useLocalStorage from 'react-use-localstorage';
 
 export const Order = ({ data, setStorage }) => {
   const [add, setAdd] = useState(null);
   const [remove, setRemove] = useState(null);
-  const [myData, setMyData] = useLocalStorage('order', '');
 
   useEffect(() => {
     if (!data) return;
+    const storedValue = JSON.parse(localStorage.getItem('order'));
 
     const newOrder = data?.food?.find((i) => i._id === add || remove);
 
-    if (!myData) {
-      addLS(newOrder);
+    if (!storedValue && add) {
+      addLS(newOrder, data);
+
+      setAdd(null);
     }
-    if (myData && add) {
-      updateLS(newOrder);
+    if (storedValue && add) {
+      updateLS(newOrder, storedValue);
+      setAdd(null);
     }
-    if (myData && remove) {
-      removeLS(newOrder);
+    if (storedValue && remove) {
+      removeLS(storedValue);
+      setRemove(null);
     }
   }, [add, remove]);
 
-  const addLS = (obj) => {
+  const addLS = (obj, firm) => {
     const order = {
-      company: data.company,
-      address: data.address,
+      company: firm.company,
+      address: firm.address,
       orders: [
         {
           name: obj.name,
           price: obj.price,
-          id: obj.id,
+          _id: obj._id,
           picture: obj.picture,
           count: 1,
         },
       ],
     };
-
-    const newData = JSON.stringify(order);
-    setMyData(newData);
+    setStorage(true);
+    localStorage.setItem('order', JSON.stringify(order));
   };
 
-  const updateLS = (obj) => {
-    const newData = JSON.parse(myData);
+  const updateLS = (obj, stor) => {
+    const newData = stor;
 
     const newArrayValue = {
       name: obj.name,
       price: obj.price,
-      id: obj.id,
+      _id: obj._id,
       picture: obj.picture,
       count: 1,
     };
+    setStorage(true);
     newData.orders.push(newArrayValue);
-    const update = JSON.stringify(newData);
-    setMyData(update);
+    localStorage.setItem('order', JSON.stringify(newData));
   };
 
-  const removeLS = (obj) => {
-    const newData = JSON.parse(myData);
-    const indx = newData.orders.findIndex((i) => i.id === remove);
+  const removeLS = (stor) => {
+    const newData = stor;
+    const indx = newData.orders.findIndex((i) => {
+      return i._id === remove;
+    });
     if (newData.orders.length === 1) {
-      setMyData('');
+      setStorage(false);
+      localStorage.clear();
     } else {
       newData.orders.splice(indx, 1);
 
-      const update = JSON.stringify(newData);
-      setMyData(update);
+      localStorage.setItem('order', JSON.stringify(newData));
     }
   };
 
