@@ -1,15 +1,17 @@
 import { Form, Wrapper, List, Item, Submit, Input } from './FormOrder.styled';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export const FormOrder = () => {
   const [data, setData] = useState({});
   const [total, setTotal] = useState();
+  const formRef = useRef(null);
 
   useEffect(() => {
     setData(JSON.parse(localStorage.getItem('order')));
   }, []);
 
   useEffect(() => {
+    if (!data) return;
     setTotal(
       data?.orders?.reduce((acc, { price, count }) => acc + price * count, 0)
     );
@@ -35,6 +37,7 @@ export const FormOrder = () => {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     const { name, email, phone, address } = e.target.elements;
     const info = {
       name: name.value,
@@ -43,15 +46,21 @@ export const FormOrder = () => {
       address: address.value,
     };
 
-    const myOrder = [info, data, { totalPrice: total }];
+    const myOrder = { info, data, totalPrice: total };
 
     console.log(myOrder);
-    // localStorage.clear();
+    reset();
+  };
+
+  const reset = () => {
+    setData({});
+    formRef.current.reset();
+    localStorage.clear();
   };
 
   return (
     <Wrapper>
-      <Form onSubmit={handleSubmit}>
+      <Form ref={formRef} onSubmit={handleSubmit}>
         <label>
           Name:
           <input name="name" type="text" />

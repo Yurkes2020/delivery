@@ -37,7 +37,7 @@ export const Order = ({ data, setStorage }) => {
           price: obj.price,
           _id: obj._id,
           picture: obj.picture,
-          count: 1,
+          count: '1',
         },
       ],
     };
@@ -53,7 +53,7 @@ export const Order = ({ data, setStorage }) => {
       price: obj.price,
       _id: obj._id,
       picture: obj.picture,
-      count: 1,
+      count: '1',
     };
     setStorage(true);
     newData.orders.push(newArrayValue);
