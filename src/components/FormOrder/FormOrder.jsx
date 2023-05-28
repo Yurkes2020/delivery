@@ -21,7 +21,7 @@ export const FormOrder = () => {
 
     setData((prevData) => {
       const updatedObjects = prevData.orders.map((obj) => {
-        return obj.id === idOrder ? { ...obj, count } : obj;
+        return obj._id === idOrder ? { ...obj, count } : obj;
       });
       return { ...prevData, orders: updatedObjects };
     });
@@ -34,24 +34,39 @@ export const FormOrder = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    const { name, email, phone, address } = e.target.elements;
+    const info = {
+      name: name.value,
+      email: email.value,
+      phone: phone.value,
+      address: address.value,
+    };
+
+    const myOrder = [info, data, { totalPrice: total }];
+
+    console.log(myOrder);
+    // localStorage.clear();
+  };
+
   return (
     <Wrapper>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <label>
           Name:
-          <input type="text" />
+          <input name="name" type="text" />
         </label>
         <label>
           Email:
-          <input type="email" />
+          <input name="email" type="email" />
         </label>
         <label>
           Phone:
-          <input type="tel" />
+          <input name="phone" type="tel" />
         </label>
         <label>
           Address:
-          <input type="text" />
+          <input name="address" type="text" />
         </label>
         <Submit type="submit">Submit</Submit>
       </Form>
@@ -63,7 +78,7 @@ export const FormOrder = () => {
               <p>{name}</p>
               <p>Price:{price}</p>
               <Input
-                min={0}
+                min={1}
                 name={_id}
                 onWheel={handleWheel}
                 onChange={handleChange}
