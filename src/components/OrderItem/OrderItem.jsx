@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Item, Add, Remove } from './OrderItem.styled';
+import { Item, Add, Remove, Text } from './OrderItem.styled';
 
 export const OrderItem = ({ data, setAdd, setRemove }) => {
   const [change, setChange] = useState(false);
@@ -9,7 +9,7 @@ export const OrderItem = ({ data, setAdd, setRemove }) => {
       {data && (
         <Item>
           <img src={data.picture} alt="burger"></img>
-          <p>{data.name}</p>
+          <Text>{data.name}</Text>
           {change ? (
             <Remove
               onClick={() => {

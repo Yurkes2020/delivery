@@ -3,25 +3,27 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  height: 90vh;
+  grid-template-columns: 1fr 3fr;
+  height: 100%;
   padding: 20px;
-  background-color: #ebc7c7;
+  background-color: #f4eaea;
 `;
 
 export const Form = styled.form`
+  padding: 10px;
   position: relative;
   display: grid;
   height: 500px;
-  background-color: #d8aaaa;
+  background-color: #d3ddb5;
   border-radius: 20px;
 `;
 
 export const List = styled.ul`
   overflow: auto;
+  margin-left: 20px;
   height: 500px;
   padding: 20px;
-  background-color: #1e1c1c;
+  background-color: #aedb55;
   border-radius: 20px;
 `;
 
@@ -31,13 +33,15 @@ export const Item = styled.li`
   grid-column-gap: 30px;
   padding: 20px;
   margin-bottom: 20px;
-  background-color: #c66f6f;
+  background-color: #84da39;
   border-radius: 20px;
+  font-size: 30px;
 `;
 
 export const Submit = styled.button`
+  cursor: pointer;
   position: absolute;
-  right: -900px;
+  right: -1100px;
   bottom: -70px;
   width: 150px;
   height: 50px;
@@ -55,4 +59,11 @@ export const Input = styled.input`
     padding: 10px;
     cursor: pointer;
   }
+`;
+
+export const User = styled.input`
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-size: 25px;
 `;

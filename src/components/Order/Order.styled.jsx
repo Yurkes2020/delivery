@@ -3,10 +3,9 @@ import styled from 'styled-components';
 export const Wrap = styled.div`
   overflow: auto;
   margin-left: 10px;
-
   border-radius: 10px;
   height: 80vh;
-  background-color: #31b4cf;
+  background-color: #cee4ab;
 `;
 
 export const List = styled.ul`

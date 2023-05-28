@@ -4,11 +4,16 @@ export const Aside = styled.aside`
   border-radius: 20px;
   height: 80vh;
   margin-bottom: 20px;
-  background-color: #8d9b27;
+  background-color: #338734;
 `;
 
 export const Item = styled.li`
   margin-bottom: 15px;
+`;
+
+export const Text = styled.p`
+  text-align: center;
+  font-size: 30px;
 `;
 
 export const Button = styled.button`

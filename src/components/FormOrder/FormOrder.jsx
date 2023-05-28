@@ -1,4 +1,12 @@
-import { Form, Wrapper, List, Item, Submit, Input } from './FormOrder.styled';
+import {
+  Form,
+  Wrapper,
+  List,
+  Item,
+  Submit,
+  Input,
+  User,
+} from './FormOrder.styled';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
@@ -73,19 +81,19 @@ export const FormOrder = () => {
       <Form ref={formRef} onSubmit={handleSubmit}>
         <label>
           Name:
-          <input name="name" type="text" />
+          <User name="name" type="text" />
         </label>
         <label>
           Email:
-          <input name="email" type="email" />
+          <User name="email" type="email" />
         </label>
         <label>
           Phone:
-          <input name="phone" type="tel" />
+          <User name="phone" type="tel" />
         </label>
         <label>
           Address:
-          <input name="address" type="text" />
+          <User name="address" type="text" />
         </label>
         <Submit type="submit">Submit</Submit>
       </Form>
