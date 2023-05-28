@@ -5,7 +5,6 @@ import axios from 'axios';
 export const FormOrder = () => {
   const [data, setData] = useState({});
   const [total, setTotal] = useState();
-  const [order, setOrder] = useState();
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -22,12 +21,9 @@ export const FormOrder = () => {
   const send = (res) => {
     return axios
       .post('http://localhost:3030/cart', res)
-      .then((response) => {
-        console.log(response.data);
-      })
+      .then()
       .catch((error) => {
         console.error('Ошибка:', error);
-        console.log(res);
       });
   };
 
@@ -62,8 +58,7 @@ export const FormOrder = () => {
 
     const myOrder = { info, data, totalPrice: total };
 
-    setOrder(myOrder);
-    send(order);
+    send(myOrder);
     reset();
   };
 

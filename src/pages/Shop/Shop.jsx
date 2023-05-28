@@ -11,7 +11,7 @@ const Shop = () => {
   const foodId = shops.find((item) => item._id === id);
 
   useEffect(() => {
-    fetch('http://localhost:3030')
+    fetch('http://localhost:3030/shop')
       .then((responce) => responce.json())
       .then(({ data }) => {
         setShops(data.shops);
