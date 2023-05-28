@@ -15,7 +15,7 @@ export const SideBar = ({ data, shopId, storage }) => {
                 backgroundColor: activeIndex === index ? 'yellow' : 'blue',
                 pointerEvents:
                   activeIndex !== index && storage ? 'none' : 'auto',
-                opacity: activeIndex !== index && storage ? '0.3' : '1',
+                opacity: activeIndex !== index && storage ? '0.5' : '1',
               }}
               onClick={() => {
                 shopId(_id);

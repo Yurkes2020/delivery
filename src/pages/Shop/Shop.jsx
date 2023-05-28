@@ -8,8 +8,6 @@ const Shop = () => {
   const [id, setId] = useState(null);
   const [storage, setStorage] = useState(false);
 
-  console.log(storage);
-
   const foodId = shops.find((item) => item._id === id);
 
   useEffect(() => {
