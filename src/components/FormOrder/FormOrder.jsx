@@ -1,9 +1,11 @@
 import { Form, Wrapper, List, Item, Submit, Input } from './FormOrder.styled';
 import { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 
 export const FormOrder = () => {
   const [data, setData] = useState({});
   const [total, setTotal] = useState();
+  const [order, setOrder] = useState();
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -16,6 +18,18 @@ export const FormOrder = () => {
       data?.orders?.reduce((acc, { price, count }) => acc + price * count, 0)
     );
   }, [data]);
+
+  const send = (res) => {
+    return axios
+      .post('http://localhost:3030/cart', res)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error('Ошибка:', error);
+        console.log(res);
+      });
+  };
 
   const handleChange = (e) => {
     const count = e.target.value;
@@ -48,7 +62,8 @@ export const FormOrder = () => {
 
     const myOrder = { info, data, totalPrice: total };
 
-    console.log(myOrder);
+    setOrder(myOrder);
+    send(order);
     reset();
   };
 
