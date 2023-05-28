@@ -1,7 +1,7 @@
 import { Aside, Item, Button } from './SideBar.styled';
 import { useState } from 'react';
 
-export const SideBar = ({ data, shopId }) => {
+export const SideBar = ({ data, shopId, storage }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -13,6 +13,9 @@ export const SideBar = ({ data, shopId }) => {
             <Button
               style={{
                 backgroundColor: activeIndex === index ? 'yellow' : 'blue',
+                pointerEvents:
+                  activeIndex !== index && storage ? 'none' : 'auto',
+                opacity: activeIndex !== index && storage ? '0.3' : '1',
               }}
               onClick={() => {
                 shopId(_id);

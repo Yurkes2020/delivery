@@ -2,7 +2,7 @@ import { Wrap, List } from './Order.styled';
 import { OrderItem } from 'components/OrderItem/OrderItem';
 import { useState, useEffect } from 'react';
 
-export const Order = ({ data }) => {
+export const Order = ({ data, setStorage }) => {
   const [add, setAdd] = useState(null);
   const [remove, setRemove] = useState(null);
 
@@ -12,7 +12,7 @@ export const Order = ({ data }) => {
     let storedData = localStorage.getItem('order');
     console.log(storedData);
 
-    const { name, price, picture } = data.food.find(
+    const { name, price, picture, id } = data.food.find(
       (i) => i._id === add || remove
     );
 
@@ -25,20 +25,19 @@ export const Order = ({ data }) => {
 
         order.orders.splice(indx, 1);
       } else {
-        const newArrayValue = { name, price, id: add, picture, count: 1 };
+        const newArrayValue = { name, price, id, picture, count: 1 };
         order.orders.push(newArrayValue);
       }
     } else {
       order = {
         company: data.company,
         address: data.address,
-        orders: [{ name, price, id: add, picture, count: 1 }],
+        orders: [{ name, price, id, picture, count: 1 }],
       };
     }
 
     localStorage.setItem('order', JSON.stringify(order));
-
-    localStorage.clear();
+    setStorage(true);
   }, [add, remove]);
 
   return (

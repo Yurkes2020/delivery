@@ -6,6 +6,9 @@ import { useState, useEffect } from 'react';
 const Shop = () => {
   const [shops, setShops] = useState([]);
   const [id, setId] = useState(null);
+  const [storage, setStorage] = useState(false);
+
+  console.log(storage);
 
   const foodId = shops.find((item) => item._id === id);
 
@@ -20,8 +23,8 @@ const Shop = () => {
 
   return (
     <Main>
-      <SideBar data={shops} shopId={setId}></SideBar>
-      <Order data={foodId}></Order>
+      <SideBar storage={storage} data={shops} shopId={setId}></SideBar>
+      <Order setStorage={setStorage} data={foodId}></Order>
     </Main>
   );
 };

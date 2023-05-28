@@ -9,6 +9,7 @@ export const OrderItem = ({ data, setAdd, setRemove }) => {
       {data && (
         <Item>
           <img src={data.picture} alt="burger"></img>
+          <p>{data.name}</p>
           {change ? (
             <Remove
               onClick={() => {
