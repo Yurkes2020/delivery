@@ -22,7 +22,6 @@ export const FormOrder = () => {
   }, [check]);
 
   useEffect(() => {
-    if (!data) return;
     setTotal(
       data?.orders?.reduce((acc, { price, count }) => acc + price * count, 0)
     );
@@ -91,8 +90,8 @@ export const FormOrder = () => {
       localStorage.setItem('order', JSON.stringify(newData));
     }
     setCheck((prev) => !prev);
+    console.log('we');
   };
-  console.log(data);
   return (
     <Wrapper>
       <Form autoComplete="on" ref={formRef} onSubmit={handleSubmit}>
