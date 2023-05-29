@@ -67,3 +67,13 @@ export const User = styled.input`
   margin-top: 10px;
   font-size: 25px;
 `;
+
+export const Remove = styled.button`
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  display: block;
+  margin-top: 10px;
+  padding: 5px 40px;
+  font-size: 25px;
+`;

@@ -6,6 +6,7 @@ import {
   Submit,
   Input,
   User,
+  Remove,
 } from './FormOrder.styled';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
@@ -78,7 +79,7 @@ export const FormOrder = () => {
 
   return (
     <Wrapper>
-      <Form ref={formRef} onSubmit={handleSubmit}>
+      <Form autoComplete="on" ref={formRef} onSubmit={handleSubmit}>
         <label>
           Name:
           <User name="name" type="text" />
@@ -112,6 +113,7 @@ export const FormOrder = () => {
                 defaultValue={1}
                 type="number"
               />
+              <Remove type="button">Remove</Remove>
             </div>
           </Item>
         ))}
