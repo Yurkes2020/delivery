@@ -90,7 +90,6 @@ export const FormOrder = () => {
       localStorage.setItem('order', JSON.stringify(newData));
     }
     setCheck((prev) => !prev);
-    console.log('we');
   };
   return (
     <Wrapper>
