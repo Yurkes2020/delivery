@@ -14,11 +14,12 @@ import axios from 'axios';
 export const FormOrder = () => {
   const [data, setData] = useState({});
   const [total, setTotal] = useState();
+  const [check, setCheck] = useState(false);
   const formRef = useRef(null);
 
   useEffect(() => {
     setData(JSON.parse(localStorage.getItem('order')));
-  }, []);
+  }, [check]);
 
   useEffect(() => {
     if (!data) return;
@@ -77,6 +78,21 @@ export const FormOrder = () => {
     localStorage.clear();
   };
 
+  const handleDelete = (id) => {
+    const newData = data;
+    const indx = newData.orders.findIndex((i) => {
+      return i._id === id;
+    });
+    if (newData.orders.length === 1) {
+      localStorage.clear();
+    } else {
+      newData.orders.splice(indx, 1);
+
+      localStorage.setItem('order', JSON.stringify(newData));
+    }
+    setCheck((prev) => !prev);
+  };
+  console.log(data);
   return (
     <Wrapper>
       <Form autoComplete="on" ref={formRef} onSubmit={handleSubmit}>
@@ -99,24 +115,27 @@ export const FormOrder = () => {
         <Submit type="submit">Submit</Submit>
       </Form>
       <List>
-        {data?.orders?.map(({ price, name, _id, picture }) => (
-          <Item key={_id}>
-            <img src={picture} alt={name} />
-            <div>
-              <p>{name}</p>
-              <p>Price:{price}</p>
-              <Input
-                min={1}
-                name={_id}
-                onWheel={handleWheel}
-                onChange={handleChange}
-                defaultValue={1}
-                type="number"
-              />
-              <Remove type="button">Remove</Remove>
-            </div>
-          </Item>
-        ))}
+        {data &&
+          data?.orders?.map(({ price, name, _id, picture }) => (
+            <Item key={_id}>
+              <img src={picture} alt={name} />
+              <div>
+                <p>{name}</p>
+                <p>Price:{price}</p>
+                <Input
+                  min={1}
+                  name={_id}
+                  onWheel={handleWheel}
+                  onChange={handleChange}
+                  defaultValue={1}
+                  type="number"
+                />
+                <Remove onClick={() => handleDelete(_id)} type="button">
+                  Remove
+                </Remove>
+              </div>
+            </Item>
+          ))}
       </List>
       <p>Total price:{total}</p>
     </Wrapper>
