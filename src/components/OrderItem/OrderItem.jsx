@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Item, Add, Remove, Text } from './OrderItem.styled';
+import { Item, Text } from './OrderItem.styled';
+import { Button } from '@mui/material';
 
 export const OrderItem = ({ data, setAdd, setRemove }) => {
   const [change, setChange] = useState(false);
@@ -11,7 +12,10 @@ export const OrderItem = ({ data, setAdd, setRemove }) => {
           <img src={data.picture} alt={data.name}></img>
           <Text>{data.name}</Text>
           {change ? (
-            <Remove
+            <Button
+              sx={{ float: 'right' }}
+              variant="contained"
+              color="success"
               onClick={() => {
                 setChange((prev) => !prev);
                 setRemove(data._id);
@@ -19,9 +23,12 @@ export const OrderItem = ({ data, setAdd, setRemove }) => {
               type="button"
             >
               Remove from cart
-            </Remove>
+            </Button>
           ) : (
-            <Add
+            <Button
+              sx={{ float: 'right' }}
+              variant="contained"
+              color="success"
               onClick={() => {
                 setChange((prev) => !prev);
                 setAdd(data._id);
@@ -29,7 +36,7 @@ export const OrderItem = ({ data, setAdd, setRemove }) => {
               type="button"
             >
               Add to cart
-            </Add>
+            </Button>
           )}
         </Item>
       )}
